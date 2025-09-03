@@ -1,0 +1,206 @@
+/* ================= Header ================= */
+.site-header {
+  height: 60px;
+  background: #1d244b;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+
+  .left {
+    display: flex;
+    align-items: center;
+
+    .icon {
+      font-size: 20px;
+      margin-right: 8px;
+      cursor: pointer;
+    }
+
+    .logo {
+      font-weight: bold;
+      font-size: 16px;
+    }
+  }
+
+  .right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    .icon {
+      font-size: 18px;
+      color:white;
+      cursor: pointer;
+    }
+
+    .wallet {
+      display: flex;
+      align-items: center;
+      background: #1f2937;
+      padding: 4px 8px;
+      border-radius: 16px;
+      font-size: 12px;
+
+      .wallet-amount {
+        color: #facc15;
+        font-weight: 600;
+        font-size: 12px;
+      }
+    }
+  }
+}
+
+/* ================= Drawer ================= */
+.custom-drawer {
+  .ant-drawer-content-wrapper {
+    max-width: 60% !important; // default width
+  }
+
+  /* Close icon spacing reduce */
+  .ant-drawer-close {
+    right: 8px !important;
+    top: 8px !important;
+  }
+
+  .ant-drawer-body {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 8px;
+    font-size: 13px;
+  }
+
+  .profile-section {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 6px;
+
+    .profile-name {
+      font-weight: 600;
+      font-size: 14px;
+    }
+  }
+
+  .drawer-wallet {
+    display: flex;
+    align-items: center;
+    background: #e6debd;
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-size: 12px;
+    margin-bottom: 6px;
+
+    .wallet-amount {
+      color: #0d0d0d;
+      font-weight: 600;
+      font-size: 12px;
+    }
+  }
+
+  .action-buttons {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 8px;
+
+    button {
+      flex: 1;
+      font-size: 12px;
+      padding: 5px 0;
+      border-radius: 6px;
+      font-weight: 600;
+    }
+
+    .btn-deposit {
+      background-color: #22c55e; // green
+      color: #fff;
+
+      &:hover {
+        background-color: #16a34a;
+      }
+    }
+
+    .btn-withdraw {
+      background-color: #ef4444; // red
+      color: #fff;
+
+      &:hover {
+        background-color: #dc2626;
+      }
+    }
+  }
+
+  .menu-btn {
+    justify-content: flex-start;
+    font-size: 12px;
+    padding: 5px 8px;
+  }
+}
+
+/* ================= Mobile Responsive ================= */
+@media (max-width: 768px) {
+  .site-header {
+    height: 60px;
+    padding: 0 10px;
+
+    .logo {
+      font-size: 14px;
+    }
+
+    .wallet {
+      font-size: 11px;
+      padding: 3px 6px;
+
+      .wallet-amount {
+        font-size: 11px;
+      }
+    }
+  }
+
+  .custom-drawer {
+    .ant-drawer-content-wrapper {
+      width: 100% !important;
+    }
+
+    .ant-drawer-body {
+      gap: 6px;
+      padding: 6px;
+      font-size: 12px;
+    }
+
+    .ant-drawer-close {
+      right: 6px !important;
+      top: 6px !important;
+    }
+
+    .profile-section {
+      gap: 4px;
+
+      .profile-name {
+        font-size: 13px;
+      }
+    }
+
+    .drawer-wallet {
+      font-size: 11px;
+      padding: 4px 6px;
+
+      .wallet-amount {
+        font-size: 11px;
+      }
+    }
+
+    .action-buttons button,
+    .menu-btn {
+      font-size: 11px;
+      padding: 4px 6px;
+    }
+  }
+}

@@ -1,0 +1,56 @@
+.notification-modal {
+  .ant-modal-content {
+    border-radius: 12px;
+    padding: 12px;
+    background: #9adbde; /* Dark theme */
+    color: white;
+  }
+
+  .ant-modal-header {
+    
+    border-bottom: 1px solid #333;
+    border-radius: 12px 12px 0 0;
+    padding: 10px 16px;
+
+    .ant-modal-title {
+      color: #000000;
+      font-size: 14px;
+      font-weight: 600;
+    }
+  }
+
+  .ant-modal-body {
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 8px 0;
+
+    /* Custom scrollbar */
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: #c6dddd;
+      border-radius: 3px;
+    }
+  }
+
+  /* List styles */
+  .ant-list {
+    background: transparent;
+
+    .ant-list-item {
+      background: #c4e8e8;
+      margin: 4px 0;
+      padding: 8px 10px;
+      border-radius: 6px;
+      font-size: 13px;
+      color: #000000;
+      border: none;
+      transition: background 0.2s ease;
+
+      &:hover {
+        background: #f1e6e6;
+      }
+    }
+  }
+}

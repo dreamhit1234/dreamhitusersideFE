@@ -1,0 +1,89 @@
+.matches-list {
+  display: flex;
+  flex-direction: column;
+
+  .match-item {
+    display: flex;
+    flex-direction: column;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 11px;
+
+    /* Alternate background colors */
+    &:nth-child(1) { background-color: #38e6f9; }
+    &:nth-child(2) { background-color: #ebe487; }
+    &:nth-child(3) { background-color: #38e6f9; }
+    &:nth-child(4) { background-color: #ebe487; }
+    &:nth-child(5) { background-color: #38e6f9; }
+    &:nth-child(6) { background-color: #ebe487; }
+
+    /* ✅ Match Info font-size increase */
+    .match-info {
+      font-size: 12px;  
+      font-weight: 600;
+      margin: 2px 0;
+      color:black;
+    }
+
+    .match-buttons {
+      display: flex;
+      gap: 6px;
+      margin-top: 4px;
+      margin-bottom: 2px;
+
+      button {
+        padding: 4px 6px;
+        font-size: 12px;
+        border-radius: 4px;
+        border: none;
+        cursor: pointer;
+        background-color: #4682b4;
+        color: white;
+
+        &:hover {
+          opacity: 0.9;
+        }
+      }
+    }
+
+    .match-countdown {
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 600;
+      color: #fff;
+      margin: 5px;
+
+      &.countdown { background-color: green; }
+      &.processing { background-color: orange; }
+      &.over { background-color: red; }
+    }
+  }
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .matches-list {
+    padding: 2px;
+    gap: 2px;
+
+    .match-item {
+      font-size: 13px;
+
+      .match-info {
+        font-size: 15px; /* ✅ mobile lo konchem thaggistam */
+      }
+
+      .match-buttons {
+        width: 100%;
+        flex-wrap: wrap;
+
+        button {
+          flex: 1;
+        }
+      }
+
+      .match-countdown { margin-top: 4px; }
+    }
+  }
+}

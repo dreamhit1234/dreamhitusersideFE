@@ -1,0 +1,110 @@
+.transactions-modal {
+  .ant-modal-content {
+    border-radius: 12px;
+  }
+
+  .ant-modal-header {
+    padding:5px;
+    border-bottom: 1px solid #374151;
+    .ant-modal-title {
+        text-align: center;
+      font-weight: 600;
+    }
+  }
+
+  .ant-modal-body {
+    padding: 16px;
+  }
+
+  /* Filter Buttons Row */
+  .filter-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 14px;
+
+    .ant-btn {
+      flex: 1;
+      border-radius: 6px;
+      font-size: 13px;
+      background: transparent;
+      border: 1px solid #374151;
+      transition: all 0.2s;
+
+      &:hover {
+         background: #28a789;
+        color: #070707;
+      }
+    }
+
+    .ant-btn + .ant-btn {
+      margin-left: 8px;
+    }
+
+    .ant-btn-primary {
+       background: #28a789;
+    }
+  }
+
+  /* Table Styling */
+  .ant-table {
+    background: transparent;
+    color: #fff;
+
+    /* Header text center */
+    .ant-table-thead > tr > th {
+        background-color: #050505;
+        color:rgb(6, 6, 6);
+      font-size: 12px;
+      font-weight: 500;
+      text-transform: uppercase;
+      border-bottom: 1px solid #050505;
+      text-align: center; /* ✅ center header text */
+    }
+
+    /* Table body */
+    .ant-table-tbody > tr > td {
+      font-size: 13px;
+      color:black;
+      border-bottom: 1px solid #374151;
+      text-align: center; /* ✅ also center body text */
+    }
+
+    .ant-tag {
+      font-size: 12px;
+      padding: 2px 8px;
+      border-radius: 6px;
+    }
+  }
+}
+
+/* ✅ Mobile Responsive */
+@media (max-width: 768px) {
+  .transactions-modal {
+    .ant-modal {
+      max-width: 95% !important;
+      top: 10px;
+    }
+
+    .ant-modal-body {
+      padding: 10px;
+    }
+
+    .filter-buttons {
+      flex-direction: row;
+      .ant-btn {
+        font-size: 12px;
+        padding: 6px;
+      }
+    }
+
+    .ant-table {
+      font-size: 12px;
+      .ant-table-thead > tr > th {
+        font-size: 11px;
+      }
+      .ant-table-tbody > tr > td {
+        font-size: 12px;
+      }
+    }
+  }
+}

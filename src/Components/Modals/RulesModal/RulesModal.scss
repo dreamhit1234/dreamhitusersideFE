@@ -1,0 +1,79 @@
+.rules-modal {
+  .ant-modal {
+    width: 420px !important; // చిన్నసైజ్ డెస్క్‌టాప్
+    max-width: 92vw;         // చిన్న స్క్రీన్‌లలో ఫిట్ అవుతుంది
+  }
+
+  .ant-modal-content {
+    border-radius: 10px;
+    padding: 0;
+  }
+
+  .ant-modal-header {
+    background: #2f98b6;
+    color: #fff;
+    border-radius: 10px 10px 0 0;
+    padding: 8px 12px;
+  }
+
+  .ant-modal-title {
+    color: #fff;
+    font-size: 14px;   // చిన్న టైటిల్
+    font-weight: 600;
+  }
+
+  .ant-modal-body {
+    padding: 10px 12px;
+  }
+
+  .rules-body {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    max-height: 260px;   // చిన్న హైట్
+    overflow-y: auto;
+  }
+
+  .rule-line {
+    font-size: 12px;     // చిన్న టెక్స్ట్
+    line-height: 1.35;
+    color: #111;
+    background: #f8fafc;
+    border: 1px solid #eef2f7;
+    border-radius: 6px;
+    padding: 6px 8px;
+  }
+}
+
+/* ✅ Mobile Responsive */
+@media (max-width: 768px) {
+  .rules-modal {
+    .ant-modal {
+      width: 94vw !important;
+      max-width: 94vw;
+      margin: 0 auto;
+    }
+
+    .ant-modal-header {
+      padding: 6px 10px;
+    }
+
+    .ant-modal-title {
+      font-size: 13px;
+    }
+
+    .ant-modal-body {
+      padding: 8px 10px;
+    }
+
+    .rules-body {
+      max-height: 220px; // మొబైల్‌లో ఇంకొంచెం చిన్నది
+      gap: 5px;
+    }
+
+    .rule-line {
+      font-size: 11.5px; // ఇంకా చిన్న ఫాంట్
+      padding: 6px 8px;
+    }
+  }
+}

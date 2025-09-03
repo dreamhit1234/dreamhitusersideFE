@@ -1,0 +1,110 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: #fff;
+  border-radius: 8px;
+  padding: 8px;
+  width: 80%;        // smaller width
+  max-width: 400px;
+  max-height: 70%;
+  overflow-y: auto;
+  text-align: center;
+}
+
+.match-title {
+  font-size: 14px;
+  font-weight: 700;
+  margin: 2px 0;
+  color: #222;
+}
+
+.match-info {
+  font-size: 11px;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.players-columns {
+  display: flex;
+  justify-content: space-between;
+  gap: 6px;
+
+  .team-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+
+    .team-name {
+      font-weight: 600;
+      font-size: 12px;
+      margin-bottom: 4px;
+      color: #000000;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    &.team1 .team-name { background-color: skyblue; } // left team
+    &.team2 .team-name { background-color: pink; }    // right team
+
+    .player-card {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 4px;
+      border-radius: 6px;
+      font-size: 11px;
+      width: 90%;
+      color: #f8f8f8;
+
+      &.team1 { background-color: #138fb8; } // light skyblue
+      &.team2 { background-color: #d2619b; } // light pink
+
+      img {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+
+      span {
+        font-size: 11px;
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+.close-btn {
+  margin-top: 8px;
+  padding: 4px 8px;
+  background-color: #43d0f7;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 11px;
+}
+
+@media (max-width: 400px) {
+  .players-columns {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .team-column {
+    width: 100%;
+  }
+}
