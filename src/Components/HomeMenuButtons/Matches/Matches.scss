@@ -1,89 +1,128 @@
 .matches-list {
-  display: flex;
-  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+
+  .swiper {
+    width: 100%;
+    height: auto;
+  }
+
+  .swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
   .match-item {
+    width: 100%;
+    max-width: 100%;
+    background: #1e1e1e; /* dark card */
+    border-radius: 10px;
+    padding: 16px;
+    margin-top: 5px; /* margin top */
+    font-size: 14px;
     display: flex;
     flex-direction: column;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 11px;
+    color: #fff; /* text white */
+    min-height: 0; /* height adjusts based on content */
+  }
 
-    /* Alternate background colors */
-    &:nth-child(1) { background-color: #38e6f9; }
-    &:nth-child(2) { background-color: #ebe487; }
-    &:nth-child(3) { background-color: #38e6f9; }
-    &:nth-child(4) { background-color: #ebe487; }
-    &:nth-child(5) { background-color: #38e6f9; }
-    &:nth-child(6) { background-color: #ebe487; }
+  .series-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 6px;
+  }
 
-    /* ✅ Match Info font-size increase */
-    .match-info {
-      font-size: 12px;  
+  .match-info {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 6px 0;
+    color: #fff;
+    text-align: center;
+  }
+
+  /* Buttons row - 4 per row */
+  .match-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+
+    button {
+      flex: 1;
+      margin: 0 4px;
+      padding: 6px 0;
+      font-size: 12px;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+      background-color: #fbc02d; /* yellow */
+      color: #000;
       font-weight: 600;
-      margin: 2px 0;
-      color:black;
-    }
+      transition: 0.3s;
 
-    .match-buttons {
-      display: flex;
-      gap: 6px;
-      margin-top: 4px;
-      margin-bottom: 2px;
-
-      button {
-        padding: 4px 6px;
-        font-size: 12px;
-        border-radius: 4px;
-        border: none;
-        cursor: pointer;
-        background-color: #4682b4;
-        color: white;
-
-        &:hover {
-          opacity: 0.9;
-        }
+      &:hover {
+        background-color: #f9a825;
       }
     }
+  }
 
-    .match-countdown {
-      display: inline-block;
-      padding: 2px 6px;
-      border-radius: 4px;
-      font-weight: 600;
-      color: #fff;
-      margin: 5px;
+  .match-countdown {
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 13px;
 
-      &.countdown { background-color: green; }
-      &.processing { background-color: orange; }
-      &.over { background-color: red; }
+    &.countdown {
+      background-color: #4caf50;
     }
+    &.processing {
+      background-color: #ff9800;
+    }
+    &.over {
+      background-color: #f44336;
+    }
+  }
+
+  /* Swiper pagination dots */
+  .swiper-pagination {
+    position: relative;
+    bottom: 0; 
+    margin-top: 8px;
+    text-align: center;
+  }
+
+  .swiper-pagination-bullet {
+    background: #2196f3 !important; /* blue */
+    opacity: 0.6;
+  }
+
+  .swiper-pagination-bullet-active {
+    background: #0d47a1 !important;
+    opacity: 1;
   }
 }
 
-/* Mobile responsive */
+/* Mobile adjustments */
 @media (max-width: 768px) {
-  .matches-list {
-    padding: 2px;
-    gap: 2px;
+  .match-item {
+    border-radius: 8px;
+    padding: 12px;
+    min-height: 0; /* height auto */
+  }
 
-    .match-item {
-      font-size: 13px;
+  .match-info {
+    font-size: 15px;
+  }
 
-      .match-info {
-        font-size: 15px; /* ✅ mobile lo konchem thaggistam */
-      }
-
-      .match-buttons {
-        width: 100%;
-        flex-wrap: wrap;
-
-        button {
-          flex: 1;
-        }
-      }
-
-      .match-countdown { margin-top: 4px; }
+  .match-buttons {
+    button {
+      font-size: 11px;
+      padding: 5px 0;
     }
   }
 }

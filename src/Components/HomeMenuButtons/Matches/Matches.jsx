@@ -2,17 +2,20 @@ import React, { useState, useEffect } from "react";
 import "./Matches.scss";
 import PlayersModal from "../../Modals/PlayersModal/PlayersModal";
 import FinalListModal from "../../Modals/FinalListModal/FinalListModal";
-import LeaderBoardModal from "../../Modals/LeaderBoardModal/LeaderBoardModal"; // ✅ import
+import LeaderBoardModal from "../../Modals/LeaderBoardModal/LeaderBoardModal";
 import { useNavigate } from "react-router-dom";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/pagination";
 
 export default function Matches() {
   const [selectedMatch, setSelectedMatch] = useState(null);
   const [showPlayersModal, setShowPlayersModal] = useState(false);
   const [showFinalListModal, setShowFinalListModal] = useState(false);
-  const [showLeaderBoardModal, setShowLeaderBoardModal] = useState(false); // ✅ state
+  const [showLeaderBoardModal, setShowLeaderBoardModal] = useState(false);
   const [countdowns, setCountdowns] = useState({});
-
-   const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const matches = [
     {
@@ -28,13 +31,6 @@ export default function Matches() {
       time: "2025-08-24T09:00:00",
       format: "ODI",
       count: "6+4",
-    },
-     {
-      series: "South Africa tour of India 2025",
-      name: "IND v AUS",
-      time: "2025-08-23T06:30:00",
-      format: "T20",
-      count: "6",
     },
     {
       series: "IND Womens tour of PAK Womens 2025",
@@ -57,8 +53,14 @@ export default function Matches() {
   };
 
   const totalAmount = () => {
-    const leftTotal = examplePlayers.left.reduce((sum, p, i) => sum + (i + 1) * 10, 0);
-    const rightTotal = examplePlayers.right.reduce((sum, p, i) => sum + (i + 7) * 10, 0);
+    const leftTotal = examplePlayers.left.reduce(
+      (sum, p, i) => sum + (i + 1) * 10,
+      0
+    );
+    const rightTotal = examplePlayers.right.reduce(
+      (sum, p, i) => sum + (i + 7) * 10,
+      0
+    );
     return `₹${leftTotal + rightTotal}`;
   };
 
@@ -89,65 +91,70 @@ export default function Matches() {
 
   return (
     <div className="matches-list">
-      {matches.map((match, index) => (
-        <div key={index} className="match-item">
-          {/* Row 1: Series Name + Countdown */}
-          <div className="match-row series-row">
-            <span className="series-name">{match.series}</span>
-            <span
-              className={`match-countdown ${
-                countdowns[match.name] === "Processing"
-                  ? "processing"
-                  : countdowns[match.name] === "Over"
-                  ? "over"
-                  : "countdown"
-              }`}
-            >
-              {countdowns[match.name]}
-            </span>
-          </div>
+      <Swiper
+        spaceBetween={15}
+        slidesPerView={1}
+        pagination={{ clickable: true }}
+        modules={[Pagination]}
+      >
+        {matches.map((match, index) => (
+          <SwiperSlide key={index}>
+            <div className="match-item">
+              {/* Top row: Series name + countdown */}
+              <div className="match-row series-row">
+                <span className="series-name">{match.series}</span>
+                <span
+                  className={`match-countdown ${
+                    countdowns[match.name] === "Processing"
+                      ? "processing"
+                      : countdowns[match.name] === "Over"
+                      ? "over"
+                      : "countdown"
+                  }`}
+                >
+                  {countdowns[match.name]}
+                </span>
+              </div>
 
-          {/* Row 2: Match Info */}
-          <div className="match-row match-info">
-            <span className="match-name">{match.name}</span> |{" "}
-            <span className="match-format">{match.format}</span> |{" "}
-            <span className="match-count">Count {match.count}</span>
-          </div>
+              {/* Match Info */}
+              <div className="match-row match-info">
+                <span className="match-name">{match.name}</span> |{" "}
+                <span className="match-format">{match.format}</span> |{" "}
+                <span className="match-count">Count {match.count}</span>
+              </div>
 
-          {/* Row 3: Buttons */}
-          <div className="match-row match-buttons">
-            <button
-              onClick={() => {
-                setSelectedMatch(match);
-                setShowPlayersModal(true);
-              }}
-            >
-              Players List
-            </button>
-
-           <button  onClick={() => navigate("/autionpage")}>
-            Auction
-          </button>
-            <button
-              onClick={() => {
-                setSelectedMatch(match);
-                setShowFinalListModal(true);
-              }}
-            >
-              Final List
-            </button>
-
-            <button
-              onClick={() => {
-                setSelectedMatch(match);
-                setShowLeaderBoardModal(true); // ✅ open leaderboard
-              }}
-            >
-              Leaderboard
-            </button>
-          </div>
-        </div>
-      ))}
+              {/* Action Buttons */}
+              <div className="match-row match-buttons">
+                <button
+                  onClick={() => {
+                    setSelectedMatch(match);
+                    setShowPlayersModal(true);
+                  }}
+                >
+                  Players List
+                </button>
+                <button onClick={() => navigate("/autionpage")}>Auction</button>
+                <button
+                  onClick={() => {
+                    setSelectedMatch(match);
+                    setShowFinalListModal(true);
+                  }}
+                >
+                  Final List
+                </button>
+                <button
+                  onClick={() => {
+                    setSelectedMatch(match);
+                    setShowLeaderBoardModal(true);
+                  }}
+                >
+                  Leaderboard
+                </button>
+              </div>
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
 
       {/* Players Modal */}
       {showPlayersModal && selectedMatch && (
@@ -168,7 +175,7 @@ export default function Matches() {
         />
       )}
 
-      {/* ✅ Leaderboard Modal */}
+      {/* Leaderboard Modal */}
       {showLeaderBoardModal && selectedMatch && (
         <LeaderBoardModal
           match={selectedMatch}
