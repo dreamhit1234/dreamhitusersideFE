@@ -9,7 +9,7 @@
     max-width: 600px;
     margin: 0 auto;
     padding: 16px;
-    margin-top: 55px; // space below SiteHeader
+    margin-top: 55px;
 
     .deposit-header {
       display: flex;
@@ -28,188 +28,133 @@
         color: #43d0f7;
       }
 
-      h2 {
-        font-size: 18px;
-        font-weight: 600;
-        margin: 0;
-      }
+      h2 { font-size: 18px; font-weight: 600; margin: 0; }
     }
 
-    /* Amount Section */
     .amount-section {
       margin-bottom: 16px;
 
-      label {
-        display: block;
-        font-size: 12px;
-        font-weight: 600;
-        margin-bottom: 4px;
-      }
+      label { font-size: 12px; font-weight: 600; margin-bottom: 4px; display: block; }
 
       input {
-        width: 100%;
-        padding: 6px 8px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        font-size: 12px;
-        margin-bottom: 8px;
+        width: 100%; padding: 6px 8px; border: 1px solid #ccc; border-radius: 4px;
+        font-size: 12px; margin-bottom: 8px;
       }
 
-      .quick-buttons {
-        display: flex;
-        gap: 8px;
-
+      .quick-buttons { display: flex; gap: 8px;
         button {
-          flex: 1;
-          padding: 6px 8px;
-          border: 1px solid #ccc;
-          border-radius: 4px;
-          background-color: #fff;
-          cursor: pointer;
-          font-size: 12px;
+          flex: 1; padding: 6px 8px; border: 1px solid #ccc; border-radius: 4px; background-color: #fff;
+          cursor: pointer; font-size: 12px;
+          &:hover { background-color: #e6f7ff; }
+        }
+      }
+    }
 
-          &:hover {
-            background-color: #e6f7ff;
+    .payment-methods {
+      display: flex; gap: 8px; flex-wrap: nowrap; justify-content: space-between; margin-bottom: 16px;
+
+      .method-btn {
+        flex: 1; max-width: 140px; padding: 8px 4px; display: flex; flex-direction: column;
+        align-items: center; gap: 4px; background: #fff; border: 1px solid #ccc; border-radius: 6px;
+        cursor: pointer; font-size: 12px; text-align: center;
+
+        &.active { border-color: #43d0f7; background-color: #e6f7ff; }
+
+        img { width: 40px; height: 40px; }
+      }
+    }
+
+    .admin-details.bordered-box {
+      border: 1px solid #ccc; border-radius: 6px; padding: 12px; margin-bottom: 16px; background-color: #fff;
+      p { font-size: 12px; margin: 4px 0; strong { font-weight: 600; } }
+      .qr-img { display: block; width: 120px; height: 120px; margin: 8px auto; }
+    }
+
+    .upload-section, .utr-section { margin-bottom: 16px;
+      label { font-size: 12px; font-weight: 600; display: block; margin-bottom: 4px; }
+      input { width: 100%; border: 1px solid #ccc; border-radius: 4px; padding: 6px 8px; font-size: 12px; }
+      .preview-img { width: 100px; height: 100px; margin-top: 8px; display: block; }
+    }
+
+    .submit-section { text-align: center;
+      .submit-btn { padding: 8px 16px; background-color: #43d0f7; color: #fff; border: none; border-radius: 6px; cursor: pointer; font-size: 14px; }
+    }
+
+    /* Deposit History Table */
+    
+      
+    .deposits-history {
+  margin-top: 16px;
+  background-color: #fff;
+  border-radius: 6px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  font-size: 11px;
+
+  h3 {
+    font-size: 12px;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11px;
+
+    thead {
+      background-color: #f1f1f1;
+      th {
+        padding: 4px 6px;
+        text-align: left;
+        font-weight: 600;
+        border-bottom: 1px solid #ccc;
+      }
+    }
+
+    tbody {
+      tr {
+        border-bottom: 1px solid #eee;
+        &:last-child {
+          border-bottom: none;
+        }
+
+        td {
+          padding: 4px 6px;
+          vertical-align: middle;
+
+          &:nth-child(3) {
+            font-weight: 600;
+            &.Pending { color: #f0ad4e; }
+            &.Accepted { color: #28a745; }
+            &.Rejected { color: #dc3545; }
           }
         }
       }
     }
+  }
+}
 
-    /* Payment Buttons */
-    .payment-methods {
-      display: flex;
-      gap: 8px;
-      flex-wrap: nowrap;
-      justify-content: space-between;
-      margin-bottom: 16px;
-
-      .method-btn {
-        flex: 1;
-        max-width: 140px;
-        padding: 8px 4px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 4px;
-        background: #fff;
-        border: 1px solid #ccc;
-        border-radius: 6px;
-        cursor: pointer;
-        font-size: 12px;
-        text-align: center;
-
-        &.active {
-          border-color: #43d0f7;
-          background-color: #e6f7ff;
-        }
-
-        img {
-          width: 40px;
-          height: 40px;
-        }
-      }
-    }
-
-    /* Admin Section */
-    .admin-details.bordered-box {
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      padding: 12px;
-      margin-bottom: 16px;
-      background-color: #fff;
-
-      p {
-        font-size: 12px;
-        margin: 4px 0;
-        strong {
-          font-weight: 600;
-        }
-      }
-
-      .qr-img {
-        display: block;
-        width: 120px;
-        height: 120px;
-        margin: 8px auto;
-      }
-    }
-
-    .upload-section,
-    .utr-section {
-      margin-bottom: 16px;
-
-      label {
-        font-size: 12px;
-        font-weight: 600;
-        display: block;
-        margin-bottom: 4px;
-      }
-
-      input {
-        width: 100%;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        padding: 6px 8px;
-        font-size: 12px;
-      }
-
-      .preview-img {
-        width: 100px;
-        height: 100px;
-        margin-top: 8px;
-        display: block;
-      }
-    }
-
-    .submit-section {
-      text-align: center;
-
-      .submit-btn {
-        padding: 8px 16px;
-        background-color: #43d0f7;
-        color: #fff;
-        border: none;
-        border-radius: 6px;
-        cursor: pointer;
-        font-size: 14px;
-      }
-    }
   }
 }
 
 /* Mobile Responsive */
 @media (max-width: 480px) {
   .deposit-content {
-    padding: 12px;
-    margin-top: 70px;
+    padding: 12px; margin-top: 70px;
 
-    .amount-section input,
-    .quick-buttons button,
-    .admin-details.bordered-box input,
-    .upload-section input,
-    .utr-section input {
-      font-size: 11px;
+    .amount-section input, .quick-buttons button, .admin-details.bordered-box input, .upload-section input, .utr-section input { font-size: 11px; }
+
+    .payment-methods .method-btn { flex: 1; font-size: 10px;
+      img { width: 30px; height: 30px; }
     }
 
-    .payment-methods .method-btn {
-      flex: 1;
-      font-size: 10px;
+    .admin-details.bordered-box .qr-img, .upload-section .preview-img { width: 80px; height: 80px; }
 
-      img {
-        width: 30px;
-        height: 30px;
-      }
-    }
+    .submit-section .submit-btn { font-size: 12px; padding: 6px 12px; }
 
-    .admin-details.bordered-box .qr-img,
-    .upload-section .preview-img {
-      width: 80px;
-      height: 80px;
-    }
-
-    .submit-section .submit-btn {
-      font-size: 12px;
-      padding: 6px 12px;
+    .deposits-history table { font-size: 11px;
+      thead th, tbody td { padding: 6px; }
     }
   }
 }

@@ -1,11 +1,26 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import SiteHeader from "../SiteHeader/SiteHeader";
 import "./HomePage.scss";
 import Matches from "../HomeMenuButtons/Matches/Matches";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export default function HomePage() {
   const navigate = useNavigate();
+  const [topStories, setTopStories] = useState([]);
+
+  // Fetch TopStories from backend
+  useEffect(() => {
+    const fetchStories = async () => {
+      try {
+        const res = await axios.get("http://localhost:8080/topstories");
+        setTopStories(res.data);
+      } catch (err) {
+        console.error("Error fetching top stories:", err);
+      }
+    };
+    fetchStories();
+  }, []);
 
   return (
     <div className="homepage">
@@ -29,18 +44,20 @@ export default function HomePage() {
 
         {/* Updates Section */}
         <div className="updates-section">
-          <h3>📢Top Stories </h3>
-          <img
-            src="https://c.ndtvimg.com/2025-08/a5nhjdgg_cheteshwar-pujara_625x300_24_August_25.jpg?im=FeatureCrop,algorithm=dnn,width=1200,height=738"
-            alt="Match Updates"
-            className="updates-image"
-          />
-          <p>
-           In his retirement statement, Pujara expressed immense gratitude for
-            his career and thanked the BCCI, Saurashtra Cricket Association, teammates,
-             coaches, fans, and his family for their support. He is expected to continue
-             his association with the game, including commentary roles.
-          </p>
+          <h3>📢 Top Stories</h3>
+          {topStories.length === 0 ? (
+            <p>No top stories available.</p>
+          ) : (
+            topStories.map((story) => (
+              <div key={story.id} className="story-item">
+                {story.image && (
+                  <img src={story.image} alt={story.title} className="updates-image" />
+                )}
+                <h4>{story.title}</h4>
+                <p>{story.description}</p>
+              </div>
+            ))
+          )}
         </div>
       </div>
     </div>

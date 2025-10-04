@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Layout, Button, Modal, Form, Input, Typography, Carousel } from "antd";
 import { WhatsAppOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import "./LandingPage.scss"; // ✅ styles add chesam
+import "./LandingPage.scss";
 
 const { Header, Content, Footer } = Layout;
 const { Title, Paragraph } = Typography;
@@ -11,49 +11,75 @@ const { Title, Paragraph } = Typography;
 export default function LandingPage() {
   const [loginOpen, setLoginOpen] = useState(false);
   const [signupOpen, setSignupOpen] = useState(false);
-  const [forgotOpen, setForgotOpen] = useState(false);
   const [loginUsername, setLoginUsername] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
+  const [currentUser, setCurrentUser] = useState(null);
   const navigate = useNavigate();
 
- const handleLogin = async () => {
-  try {
-    const res = await axios.post("http://localhost:8080/users/login", {
-      username: loginUsername,
-      password: loginPassword,
-    });
+  useEffect(() => {
+    // Load logged-in user from localStorage
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (user) setCurrentUser(user);
+  }, []);
 
-    const user = res.data;
+  // 🔑 LOGIN
+  const handleLogin = async () => {
+    try {
+      const res = await axios.post("http://localhost:8080/users/login", {
+        username: loginUsername,
+        password: loginPassword,
+      });
 
-    if (user) {
-      // 🔹 Save user to localStorage for SiteHeader
-      localStorage.setItem("user", JSON.stringify(user));
+      const user = res.data;
 
-      setLoginOpen(false);
-      navigate("/home");
-    } else {
-      alert("Invalid username or password");
+      if (user) {
+        localStorage.setItem("user", JSON.stringify(user));
+        setCurrentUser(user);
+        setLoginOpen(false);
+        navigate("/home");
+      } else {
+        alert("Invalid username or password");
+      }
+    } catch (err) {
+      console.error(err);
+      alert(err.response?.data?.message || "Server error, try again later");
     }
-  } catch (err) {
-    console.error(err);
-    alert(err.response?.data?.message || "Server error, try again later");
-  }
-};
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    setCurrentUser(null);
+  };
 
   return (
     <Layout className="dream6-layout">
+      {/* HEADER */}
       <Header className="dream6-header">
         <div className="logo">Dream-Hit</div>
         <div className="header-actions">
-          <Button className="yellow-btn" size="small" onClick={() => setLoginOpen(true)}>
-            Login
-          </Button>
-          <Button className="yellow-btn-outline" size="small" onClick={() => setSignupOpen(true)}>
-            Signup
-          </Button>
+          {currentUser ? (
+            <>
+              <span style={{ color: "#fff", marginRight: 12 }}>
+                {currentUser.username}
+              </span>
+              <Button className="yellow-btn-outline" size="small" onClick={handleLogout}>
+                Logout
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button className="yellow-btn" size="small" onClick={() => setLoginOpen(true)}>
+                Login
+              </Button>
+              <Button className="yellow-btn-outline" size="small" onClick={() => setSignupOpen(true)}>
+                Signup
+              </Button>
+            </>
+          )}
         </div>
       </Header>
 
+      {/* BODY */}
       <Content className="dream6-content">
         <Carousel autoplay dots>
           <div className="banner">
@@ -79,11 +105,15 @@ export default function LandingPage() {
         </div>
 
         <div className="contact">
-          <p><WhatsAppOutlined style={{ fontSize: 18, color: "#25D366", marginRight: 6 }} />WhatsApp: +91 9876543210</p>
+          <p>
+            <WhatsAppOutlined style={{ fontSize: 18, color: "#25D366", marginRight: 6 }} />
+            WhatsApp: +91 9876543210
+          </p>
           <p>Email: dreamhithelp@example.com</p>
         </div>
       </Content>
 
+      {/* FOOTER */}
       <Footer className="dream6-footer">
         All rights reserved © 2025 dream6.clubofficial@gmail.com
       </Footer>
@@ -111,7 +141,16 @@ export default function LandingPage() {
             />
           </Form.Item>
 
-          <Button block onClick={handleLogin} style={{ margin: "16px 0", background: "#f5c518", border: "none", fontWeight: "bold" }}>
+          <Button
+            block
+            onClick={handleLogin}
+            style={{
+              margin: "16px 0",
+              background: "#f5c518",
+              border: "none",
+              fontWeight: "bold",
+            }}
+          >
             Login Now
           </Button>
         </Form>
@@ -120,7 +159,7 @@ export default function LandingPage() {
       {/* SIGNUP MODAL */}
       <Modal open={signupOpen} onCancel={() => setSignupOpen(false)} footer={null} centered title="Dream-Hit Signup">
         <div style={{ textAlign: "center", marginBottom: 16 }}>
-          <p>For ID please contact WhatsApp number:</p>
+          <p>For an account, please contact the admin via WhatsApp:</p>
           <WhatsAppOutlined style={{ fontSize: 24, color: "green" }} /> +91 9876543210
         </div>
       </Modal>

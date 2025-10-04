@@ -1,22 +1,22 @@
 .withdraw-page {
-  height: 100vh; // full screen
+  height: 100vh;
   display: flex;
   flex-direction: column;
   background-color: #f9f9f9;
   font-size: 11px;
   width: 100%;
-  max-width: 100vw;   // lock to viewport
-  overflow-x: hidden; // ⛔ stop left-right scroll
+  max-width: 100vw;
+  overflow-x: hidden;
 
   .withdraw-content {
     flex: 1;
-    margin-top: 40px; // keeps below SiteHeader
+    margin-top: 40px;
     padding: 12px;
-    overflow-y: auto;   // only vertical scroll
-    overflow-x: hidden; // prevent sideways movement
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 
-  /* 🔙 Back Button + Header */
+  /* 🔙 Header & Back Button */
   .withdraw-header {
     display: flex;
     align-items: center;
@@ -107,7 +107,7 @@
     }
   }
 
-  /* 🎠 Carousel */
+  /* 🎠 Bank Carousel */
   .carousel-wrapper {
     display: flex;
     align-items: center;
@@ -116,7 +116,7 @@
     margin-bottom: 15px;
     flex-wrap: nowrap;
     max-width: 100%;
-    overflow-x: hidden; // stop sideways scroll
+    overflow-x: hidden;
 
     .nav-btn {
       background: #007bff;
@@ -147,7 +147,7 @@
       background: #fff;
       font-size: 12px;
       width: 100%;
-      max-width: 260px; // mobile safe
+      max-width: 260px;
       position: relative;
       text-align: left;
       transition: 0.2s ease;
@@ -178,7 +178,7 @@
     }
   }
 
-  /* 💵 Amount Input */
+  /* 💵 Amount Section */
   .amount-section {
     margin-bottom: 15px;
 
@@ -199,14 +199,12 @@
     }
   }
 
-  /* ⚠️ Error */
   .error-msg {
     color: red;
     font-size: 12px;
     margin-bottom: 8px;
   }
 
-  /* ✅ Submit Button */
   .submit-section {
     text-align: center;
     margin-top: 8px;
@@ -226,60 +224,83 @@
         background: #218838;
       }
     }
+  }
 
-    .withdraw-process {
-      margin-top: 12px;
-      font-size: 12px;
-      color: #000000;
-      line-height: 1.4;
-      padding: 8px;
+  /* 💹 Withdraw History Table */
+  .withdraw-history {
+    margin-top: 16px;
+    background-color: #fff;
+    border-radius: 6px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    font-size: 11px;
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+
+      thead {
+        background-color: #f1f1f1;
+
+        th {
+          padding: 6px;
+          text-align: left;
+          font-weight: 600;
+          border-bottom: 1px solid #ccc;
+          font-size: 11px;
+        }
+      }
+
+      tbody {
+        tr {
+          border-bottom: 1px solid #eee;
+
+          &:last-child {
+            border-bottom: none;
+          }
+
+          td {
+            padding: 4px 6px;
+            vertical-align: middle;
+            font-size: 11px;
+
+            &.Pending { color: #f0ad4e; font-weight: 600; }
+            &.Accepted { color: #28a745; font-weight: 600; }
+            &.Rejected { color: #dc3545; font-weight: 600; }
+          }
+        }
+      }
     }
   }
+
 }
 
-/* 📱 Mobile Responsive */
+/* 📱 Mobile */
 @media (max-width: 768px) {
   .withdraw-page {
     font-size: 10px;
     margin-top: 5px;
 
-    .withdraw-header h2 {
-      font-size: 14px;
-    }
+    .withdraw-header h2 { font-size: 14px; }
 
     .add-bank-btn {
       font-size: 10px;
 
-      img {
-        width: 20px;
-        height: 20px;
-      }
-
-      span {
-        font-size: 10px;
-      }
+      img { width: 20px; height: 20px; }
+      span { font-size: 10px; }
     }
 
-    .bank-form input {
-      font-size: 11px;
-    }
+    .bank-form input { font-size: 11px; }
 
     .carousel-wrapper {
       gap: 6px;
 
-      .nav-btn {
-        padding: 6px;
-        font-size: 12px;
-      }
-
-      .bank-card {
-        width: 90%;
-        font-size: 11px;
-      }
+      .nav-btn { padding: 6px; font-size: 12px; }
+      .bank-card { width: 90%; font-size: 11px; }
     }
 
-    .submit-btn {
-      font-size: 13px;
-    }
+    .submit-btn { font-size: 13px; }
+    .withdraw-history table thead th,
+    .withdraw-history table tbody td { font-size: 10px; }
   }
 }

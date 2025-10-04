@@ -24,10 +24,7 @@ export default function SiteHeader() {
   const [rulesModalOpen, setRulesModalOpen] = useState(false);
   const [notifyModalOpen, setNotifyModalOpen] = useState(false);
 
-  // ✅ User state (from localStorage)
   const [user, setUser] = useState(null);
-
-  // Notifications
   const [notifications] = useState([
     "Welcome to Dream-Hit!",
     "Your last deposit was successful.",
@@ -41,12 +38,9 @@ export default function SiteHeader() {
 
   const navigate = useNavigate();
 
-  // Load user once on component mount
   useEffect(() => {
     const savedUser = localStorage.getItem("user");
-    if (savedUser) {
-      setUser(JSON.parse(savedUser));
-    }
+    if (savedUser) setUser(JSON.parse(savedUser));
   }, []);
 
   const handleOpenNotifications = () => {
@@ -71,9 +65,9 @@ export default function SiteHeader() {
         </div>
 
         <div className="right">
-          <Badge count={unreadCount} size="small" offset={[-2, 6]}>
+          {/* <Badge count={unreadCount} size="small" offset={[-2, 6]}>
             <BellOutlined className="icon" onClick={handleOpenNotifications} />
-          </Badge>
+          </Badge> */}
           <div className="wallet">
             <WalletIcon style={{ marginRight: 6 }} />
             <span className="wallet-amount">₹ {user?.amount || 0}/-</span>
@@ -110,19 +104,41 @@ export default function SiteHeader() {
               </button>
             </div>
 
-            <Button icon={<BankOutlined />} className="menu-btn" block onClick={() => setTxModalOpen(true)}>
+            {/* <Button
+              icon={<BankOutlined />}
+              className="menu-btn"
+              block
+              onClick={() => setTxModalOpen(true)}
+            >
               Transactions
-            </Button>
+            </Button> */}
 
-            <Button icon={<LockOutlined />} className="menu-btn" block onClick={() => setCpModalOpen(true)}>
+            {/* Change Password */}
+            <Button
+              icon={<LockOutlined />}
+              className="menu-btn"
+              block
+              onClick={() => setCpModalOpen(true)}
+            >
               Change Password
             </Button>
 
-            <Button icon={<BookOutlined />} className="menu-btn" block onClick={() => setRulesModalOpen(true)}>
+            <Button
+              icon={<BookOutlined />}
+              className="menu-btn"
+              block
+              onClick={() => setRulesModalOpen(true)}
+            >
               Rules
             </Button>
 
-            <Button danger icon={<PoweroffOutlined />} className="menu-btn" block onClick={handleLogout}>
+            <Button
+              danger
+              icon={<PoweroffOutlined />}
+              className="menu-btn"
+              block
+              onClick={handleLogout}
+            >
               Logout
             </Button>
           </>
@@ -133,9 +149,19 @@ export default function SiteHeader() {
 
       {/* Modals */}
       <TransactionModal open={txModalOpen} onClose={() => setTxModalOpen(false)} />
-      <ChangePasswordModal open={cpModalOpen} onClose={() => setCpModalOpen(false)} />
+      <ChangePasswordModal
+        open={cpModalOpen}
+        onClose={() => setCpModalOpen(false)}
+        username={user?.username} // pass username for password change
+      />
       <RulesModal open={rulesModalOpen} onClose={() => setRulesModalOpen(false)} />
-      <NotificationModal open={notifyModalOpen} onClose={() => setNotifyModalOpen(false)} notifications={notifications} />
+      <NotificationModal
+        open={notifyModalOpen}
+        onClose={() => setNotifyModalOpen(false)}
+        notifications={notifications}
+      />
     </>
   );
 }
+
+
